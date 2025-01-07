@@ -1,8 +1,11 @@
+import Queue from "./queue.js";
+
 function knightMoves(src, dest) {
   console.log("This is the knightMoves function");
   let path = [src];
   let visited = new Set();
-
+  let queue = new Queue();
+  // TODO: implement
   return path;
 }
 
