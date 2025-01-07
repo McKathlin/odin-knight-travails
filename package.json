@@ -1,0 +1,25 @@
+{
+  "name": "odin-knight-travails",
+  "version": "1.0.0",
+  "description": "knightMoves(src, dest) finds a knight's shortest path between two positions on a chess board",
+  "keywords": [
+    "chess",
+    "knight",
+    "BFS"
+  ],
+  "homepage": "https://github.com/McKathlin/odin-knight-travails#readme",
+  "bugs": {
+    "url": "https://github.com/McKathlin/odin-knight-travails/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/McKathlin/odin-knight-travails.git"
+  },
+  "license": "ISC",
+  "author": "McKathlin",
+  "type": "module",
+  "main": "main.js",
+  "scripts": {
+    "test": "node main.js"
+  }
+}
