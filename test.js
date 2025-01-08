@@ -31,5 +31,5 @@ export default (function() {
     }
   }
 
-  return { areEqual, isTrue, fail };
+  return { areEqual, isTrue, pass, fail };
 }());
