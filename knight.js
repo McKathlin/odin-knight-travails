@@ -1,8 +1,8 @@
 import Queue from "./queue.js";
+import test from "./test.js";
 
 export default (function() {
   function knightMoves(src, dest) {
-    console.log("This is the knightMoves function");
     let pathQueue = new Queue();
     pathQueue.enqueue([src]);
     let visitedCoords = new KeySet(_coordsToKey);
@@ -10,24 +10,19 @@ export default (function() {
     while (!pathQueue.isEmpty()) {
       let currentPath = pathQueue.dequeue();
       let latestCoords = currentPath[currentPath.length - 1];
-      _forEachNextStep(latestCoords, (x, y) => {
-        let nextPath = [...latestCoords, [x, y]];
-        // TODO: finish implementing
-      })
+      for (const nextCoords of _makeNextSteps(latestCoords)) {
+        if (visitedCoords.has(nextCoords)) {
+          continue; // Skip these coords; they're already visited.
+        }
+        let nextPath = [...currentPath, nextCoords];
+        if (_areCoordsEqual(nextCoords, dest)) {
+          return nextPath;
+        } else {
+          pathQueue.enqueue(nextPath);
+        }
+      }
     }
-    // TODO: Replace with actual path
-    return [src, dest];
-  }
-
-  function _forEachNextStep([x, y], callback) {
-    callback(x - 2, y - 1);
-    callback(x - 2, y + 1);
-    callback(x - 1, y - 2);
-    callback(x - 1, y + 2);
-    callback(x + 1, y - 2);
-    callback(x + 1, y + 2);
-    callback(x + 2, y - 1);
-    callback(x + 2, y + 1);
+    return null;
   }
 
   function _coordsToKey(px, py) {
@@ -39,6 +34,23 @@ export default (function() {
       y = py;
     }
     return `${x}${y}`;
+  }
+
+  function _areCoordsEqual([xa, ya], [xb, yb]) {
+    return xa == xb && ya == yb;
+  }
+
+  function _makeNextSteps([x, y]) {
+    return [
+      [x - 2, y - 1],
+      [x - 2, y + 1],
+      [x - 1, y - 2],
+      [x - 1, y + 2],
+      [x + 1, y - 2],
+      [x + 1, y + 2],
+      [x + 2, y - 1],
+      [x + 2, y + 1],
+    ];
   }
 
   class KeySet {
