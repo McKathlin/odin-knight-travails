@@ -27,7 +27,6 @@ test.areEqual(knightMoves([0,0], [-1,-2]), null);
 test.areEqual(knightMoves([0,0], [8,8]), null);
 
 // knightMoves random tests
-
 for (let i = 0; i < 100; i++) {
   let pointA = randomBoardCoords();
   let pointB = randomBoardCoords();
@@ -39,6 +38,8 @@ for (let i = 0; i < 100; i++) {
   auditPath(forward, i < 10);
   auditPath(backward, false);
 }
+
+// Testing helper functions
 
 function randomBoardCoords() {
   const BOARD_SIZE = 8;
