@@ -1,35 +1,35 @@
 export default (function() {
+  function pass(description) {
+    if (description) {
+      console.log(`Passed: ${description}`);
+    }
+    return true;
+  }
+
+  function fail(description) {
+    if (description) {
+      console.error(`Failed: ${description}`);
+    } else {
+      throw new Error("Test failed");
+    }
+    return false;
+  }
+
   function areEqual(a, b, description) {
     if (a === b) {
-      if (description) {
-        console.log(`Passed: ${description}`);
-      }
-      return true;
+      return pass(description);
     } else {
-      if (description) {
-        console.error(`Failed: ${description}`);
-      } else {
-        throw new Error("Equality test failed");
-      }
-      return false;
+      return fail(description);
     }
   }
 
   function isTrue(condition, description) {
     if (condition) {
-      if (description) {
-        console.log(`Passed: ${description}`);
-      }
-      return true;
+      return pass(description);
     } else {
-      if (description) {
-        console.error(`Failed: ${description}`);
-      } else {
-        throw new Error("Assertion test failed");
-      }
-      return false;
+      return fail(description);
     }
   }
 
-  return { areEqual, isTrue };
+  return { areEqual, isTrue, fail };
 }());
