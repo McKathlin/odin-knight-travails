@@ -1,8 +1,15 @@
 import Queue from "./queue.js";
-import test from "./test.js";
 
 export default (function() {
+  const BOARD_WIDTH = 8;
+  const BOARD_HEIGHT = 8;
+
   function knightMoves(src, dest) {
+    if (_areCoordsEqual(src, dest)) {
+      return [src]; // No need to move at all!
+    }
+
+    // The queue helps us search breadth first.
     let pathQueue = new Queue();
     pathQueue.enqueue([src]);
     let visitedCoords = new KeySet(_coordsToKey);
@@ -10,15 +17,16 @@ export default (function() {
     while (!pathQueue.isEmpty()) {
       let currentPath = pathQueue.dequeue();
       let latestCoords = currentPath[currentPath.length - 1];
-      for (const nextCoords of _makeNextSteps(latestCoords)) {
+      for (const nextCoords of _makeNextValidSteps(latestCoords)) {
         if (visitedCoords.has(nextCoords)) {
-          continue; // Skip these coords; they're already visited.
+          continue; // Skip these coords; they're already added.
         }
-        let nextPath = [...currentPath, nextCoords];
+        const nextPath = [...currentPath, nextCoords];
         if (_areCoordsEqual(nextCoords, dest)) {
           return nextPath;
         } else {
           pathQueue.enqueue(nextPath);
+          visitedCoords.add(nextCoords);
         }
       }
     }
@@ -27,7 +35,7 @@ export default (function() {
 
   function _coordsToKey(px, py) {
     let x, y;
-    if (!y && Array.isArray(px)) {
+    if (!py && Array.isArray(px)) {
       [x, y] = px;
     } else {
       x = px;
@@ -40,17 +48,26 @@ export default (function() {
     return xa == xb && ya == yb;
   }
 
-  function _makeNextSteps([x, y]) {
-    return [
-      [x - 2, y - 1],
-      [x - 2, y + 1],
-      [x - 1, y - 2],
-      [x - 1, y + 2],
-      [x + 1, y - 2],
-      [x + 1, y + 2],
-      [x + 2, y - 1],
-      [x + 2, y + 1],
-    ];
+  function _makeNextValidSteps(currentCoords) {
+    let validSteps = [];
+    _forPossibleStepsFrom(currentCoords, (x, y) => {
+      // Validate bounds
+      if (x >= 0 && x < BOARD_WIDTH && y >= 0 && y < BOARD_HEIGHT) {
+        validSteps.push([x, y]);
+      }
+    });
+    return validSteps;
+  }
+
+  function _forPossibleStepsFrom([x, y], callback) {
+    callback(x - 2, y - 1);
+    callback(x - 2, y + 1);
+    callback(x - 1, y - 2);
+    callback(x - 1, y + 2);
+    callback(x + 1, y - 2);
+    callback(x + 1, y + 2);
+    callback(x + 2, y - 1);
+    callback(x + 2, y + 1);
   }
 
   class KeySet {
