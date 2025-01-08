@@ -20,7 +20,14 @@ export default (function() {
   }
 
   function _forEachNextStep([x, y], callback) {
-    // TODO
+    callback(x - 2, y - 1);
+    callback(x - 2, y + 1);
+    callback(x - 1, y - 2);
+    callback(x - 1, y + 2);
+    callback(x + 1, y - 2);
+    callback(x + 1, y + 2);
+    callback(x + 2, y - 1);
+    callback(x + 2, y + 1);
   }
 
   function _coordsToKey(px, py) {
