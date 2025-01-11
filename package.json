@@ -20,7 +20,14 @@
   "type": "module",
   "main": "main.js",
   "scripts": {
-    "test": "node main.js"
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
+  },
+  "jest": {
+    "testPathIgnorePatterns": [
+      "/node_modules/"
+    ],
+    "moduleFileExtensions": ["js", "json", "es6"],
+    "transform": {}
   },
   "devDependencies": {
     "jest": "^29.7.0"
