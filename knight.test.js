@@ -37,9 +37,49 @@ test('moves across board', () => {
 test('moves one square over', () => {
   expect(knightMoves([0,0], [0,1])).toBeTruthy();
 });
-/*
+
 test('moves between any pair of random positions', () => {
-  expect(true).toBe(false); // TODO: write test
+  function randomBoardCoords() {
+    const BOARD_SIZE = 8;
+    return [
+      Math.floor(Math.random() * BOARD_SIZE),
+      Math.floor(Math.random() * BOARD_SIZE)
+    ];
+  }
+
+  function auditPath(path) {
+    // Ensure all coords are in bounds
+    const BOARD_SIZE = 8;
+    for (const [x, y] of path) {
+      expect(x).toBeGreaterThanOrEqual(0);
+      expect(x).toBeLessThan(BOARD_SIZE);
+      expect(y).toBeGreaterThanOrEqual(0);
+      expect(y).toBeLessThan(BOARD_SIZE);
+    }
+
+    // Ensure all steps are valid knight steps
+    for (let i = 1; i < path.length; i++) {
+      let [x, y] = path[i];
+      let [prevX, prevY] = path[i - 1];
+      let xDiff = Math.abs(x - prevX);
+      let yDiff = Math.abs(y - prevY);
+      expect([1, 2]).toContain(xDiff);
+      expect([1, 2]).toContain(yDiff);
+      expect(xDiff).not.toEqual(yDiff);
+    }
+  }
+
+  for (let i = 0; i < 100; i++) {
+    let pointA = randomBoardCoords();
+    let pointB = randomBoardCoords();
+    let forward = knightMoves(pointA, pointB);
+    let backward = knightMoves(pointB, pointA);
+    expect(forward).toBeTruthy();
+    expect(backward).toBeTruthy();
+    expect(forward.length).toEqual(backward.length);
+    auditPath(forward);
+    auditPath(backward);
+  }
 });
-*/
+
 
