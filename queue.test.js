@@ -1,4 +1,3 @@
-import queue from "./queue";
 import Queue from "./queue";
 
 test('populates up front', () => {
