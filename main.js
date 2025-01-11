@@ -10,3 +10,5 @@ function logMoves(start, end) {
 }
 
 logMoves([1,1], [6,5]);
+console.log('');
+logMoves([7,7], [0,0]);
