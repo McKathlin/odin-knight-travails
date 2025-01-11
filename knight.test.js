@@ -6,8 +6,8 @@ test('typical two-move case', () => {
 
 test('matches start and end inputs', () => {
   const result = knightMoves([4,5], [7, 2]);
-  expect(result[0]).toStrictEqual([4, 5]);
-  expect(result[result.length - 1]).toStrictEqual([7, 2]);
+  expect(result[0]).toEqual([4, 5]);
+  expect(result[result.length - 1]).toEqual([7, 2]);
 });
 
 test('makes size 1 route to itself', () => {
@@ -19,23 +19,23 @@ test('makes size 2 route 1 move away', () => {
 });
 
 test('cannot move to negative indices', () => {
-  expect(knightMoves([0,0], [-1,-2])).toBe(null);
+  expect(knightMoves([0,0], [-1,-2])).toBeNull();
 });
 
 test('cannot move beyond board size', () => {
-  expect(knightMoves([0,0], [8,8])).toBe(null);
+  expect(knightMoves([0,0], [8,8])).toBeNull();
 });
 
 test('moves along edge', () => {
-  expect(!!knightMoves([7,0], [7,7])).toBe(true);
+  expect(knightMoves([7,0], [7,7])).toBeTruthy();
 });
 
 test('moves across board', () => {
-  expect(!!knightMoves([7,7], [0,0])).toBe(true);
+  expect(knightMoves([7,7], [0,0])).toBeTruthy();
 });
 
 test('moves one square over', () => {
-  expect(!!knightMoves([0,0], [0,1])).toBe(true);
+  expect(knightMoves([0,0], [0,1])).toBeTruthy();
 });
 /*
 test('moves between any pair of random positions', () => {
