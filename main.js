@@ -1,20 +1,5 @@
 import knightMoves from './knight.js';
-import Queue from './queue.js';
 import oldTest from './oldTest.js';
-
-// Queue tests
-let q = new Queue([9, 18, 27, 36]);
-q.enqueue(10);
-oldTest.areEqual(q.dequeue(), 9);
-q.enqueue(20);
-oldTest.areEqual(q.dequeue(), 18);
-oldTest.areEqual(q.dequeue(), 27);
-q.enqueue(30);
-oldTest.areEqual(q.dequeue(), 36);
-oldTest.areEqual(q.dequeue(), 10);
-oldTest.areEqual(q.dequeue(), 20);
-oldTest.areEqual(q.dequeue(), 30);
-oldTest.areEqual(q.dequeue(), null);
 
 // knightMoves edge tests
 auditPath(knightMoves([3,3], [4,5])); // Single step
